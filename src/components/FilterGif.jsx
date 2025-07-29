@@ -1,25 +1,7 @@
 import React from "react";
 import { HiArrowTrendingUp } from "react-icons/hi2";
 import { GifState } from "../context/gifContext";
-
-const filters = [
-  {
-    title: "GIFs",
-    value: "gifs",
-    background:
-      "bg-gradient-to-tr from-purple-500 via-purple-600 to-purple-500",
-  },
-  {
-    title: "Stickers",
-    value: "stickers",
-    background: "bg-gradient-to-tr from-teal-500 via-teal-600 to-teal-500",
-  },
-  {
-    title: "Text",
-    value: "text",
-    background: "bg-gradient-to-tr from-blue-500 via-blue-600 to-blue-500",
-  },
-];
+import { filters } from "../utils/constants";
 
 const FilterGif = ({ alignLeft = false, showTrending = true }) => {
   const { filter, setFilter } = GifState();
@@ -42,7 +24,13 @@ const FilterGif = ({ alignLeft = false, showTrending = true }) => {
 
       <div className=" flex bg-gray-800 rounded-full">
         {filters.map((f) => (
-          <span onClick={() => setFilter(f.value)} className={`font-semibold min-w-40 rounded-full text-center py-2 cursor-pointer ${filter == f.value ? f.background : ""}`}>{f.title}</span>
+          <span
+            onClick={() => setFilter(f.value)}
+            className={`font-semibold min-w-40 rounded-full text-center py-2 cursor-pointer ${
+              filter == f.value ? f.background : ""
+            }`}>
+            {f.title}
+          </span>
         ))}
       </div>
     </div>

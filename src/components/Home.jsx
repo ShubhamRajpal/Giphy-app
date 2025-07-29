@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { GifState } from "../context/gifContext";
 import banner from "../assets/banner.gif";
 import Gif from "./Gif";
