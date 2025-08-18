@@ -2,9 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-
-@layer utilities{
-    .gradient{
-        @apply bg-gradient-to-r from-blue-800 via-gray-600 to-pink-600; 
-    }
+@layer utilities {
+  .gradient {
+    @apply bg-gradient-to-r from-blue-800 via-gray-600 to-pink-600;
+  }
+  .faded-text {
+    @apply font-bold text-sm text-gray-400;
+  }
+  .divider {
+    @apply w-full h-0.5 my-6 bg-gray-800;
+  }
 }

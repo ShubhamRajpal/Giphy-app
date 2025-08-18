@@ -4,6 +4,7 @@ import logo from "../assets/logo.png";
 import { HiDotsVertical } from "react-icons/hi";
 import { HiMiniBars3BottomRight } from "react-icons/hi2";
 import { GifState } from "../context/gifContext";
+import GifSearch from "./GifSearch";
 
 const Header = () => {
   const [showCategories, setShowCategories] = useState(false);
@@ -27,7 +28,7 @@ const Header = () => {
           <img src={logo} alt="logo" className="w-12" />
           <h1 className="tracking-tight font-bold text-5xl">GIFFY.</h1>
         </Link>
-        <div className="flex items-center gap-6">
+        <div className="flex font-bold items-center gap-6">
           {categories?.slice(0, 6).map((category) => (
             <Link
               to={"/" + category.name}
@@ -71,6 +72,7 @@ const Header = () => {
           </div>
         )}
       </div>
+      <GifSearch />
     </nav>
   );
 };
