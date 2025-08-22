@@ -1,16 +1,21 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { HiDotsVertical } from "react-icons/hi";
 import { HiMiniBars3BottomRight } from "react-icons/hi2";
 import { GifState } from "../context/gifContext";
 import GifSearch from "./GifSearch";
+import GPTSearch from "./GPTSearch";
 
 const Header = () => {
   const [showCategories, setShowCategories] = useState(false);
   const [categories, setCategories] = useState([]);
 
-  const { gf, favorites } = GifState();
+  const { gf, favorites, showGptSearch, setShowGPTSearch } = GifState();
+
+  const handleGPTSearchClick = () => {
+    setShowGPTSearch(!showGptSearch);
+  };
 
   useEffect(() => {
     fetchGifCategories();
@@ -29,33 +34,41 @@ const Header = () => {
           <h1 className="tracking-tight font-bold text-5xl">GIFFY.</h1>
         </Link>
         <div className="flex font-bold items-center gap-6">
-          {categories?.slice(0, 6).map((category) => (
-            <Link
-              to={"/" + category.name}
-              key={category.name_encoded}
-              className="px-5 py-1 hover:gradient border-b-4 hidden lg:block">
-              {category.name}
-            </Link>
-          ))}
+          {!showGptSearch &&
+            categories?.slice(0, 4).map((category) => (
+              <Link
+                to={"/" + category.name}
+                key={category.name_encoded}
+                className="px-5 py-1 hover:gradient border-b-4 hidden lg:block">
+                {category.name}
+              </Link>
+            ))}
 
-          <button onClick={() => setShowCategories(!showCategories)}>
-            <HiDotsVertical
-              size={35}
-              className={`py-0.5 hover:gradient ${
-                showCategories ? "gradient" : ""
-              } border-b-4 hidden lg:block`}
-            />
-          </button>
+          {!showGptSearch && (
+            <button onClick={() => setShowCategories(!showCategories)}>
+              <HiDotsVertical
+                size={35}
+                className={`py-0.5 hover:gradient ${
+                  showCategories ? "gradient" : ""
+                } border-b-4 hidden lg:block`}
+              />
+            </button>
+          )}
           {favorites.length > 0 && (
             <div className="px-4 py-1 bg-gray-700 rounded-sm cursor-pointer">
               <Link to="/favorites">Favorites</Link>
             </div>
           )}
+          <button
+            className="px-4 py-1 bg-gray-700 rounded-sm cursor-pointer"
+            onClick={handleGPTSearchClick}>
+            {showGptSearch ? "Home" : "GPT Search"}
+          </button>
           <button className="text-sky-400 block lg:hidden">
             <HiMiniBars3BottomRight size={30} />
           </button>
         </div>
-        {showCategories && (
+        {!showGptSearch && showCategories && (
           <div className="absolute w-full right-0 top-14 px-4 pt-4 pb-8 gradient z-20">
             <span className="text-3xl font-bold">Categories</span>
             <hr className="bg-gray-100 opacity-50 mb-4" />
@@ -72,7 +85,7 @@ const Header = () => {
           </div>
         )}
       </div>
-      <GifSearch />
+      {!showGptSearch && <GifSearch />}
     </nav>
   );
 };

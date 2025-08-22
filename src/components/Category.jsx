@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { GifState } from "../context/gifContext";
 import { useParams } from "react-router-dom";
 import Gif from "./Gif";
-import FollowOn from "./FollowOn";
+import FollowOn from "./followOn";
 
 const Category = () => {
   const [results, setResults] = useState();

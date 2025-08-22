@@ -7,6 +7,8 @@ const GifProvider = ({ children }) => {
   const [gifs, setGifs] = useState([]);
   const [filter, setFilter] = useState("gifs");
   const [favorites, setFavorites] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [showGptSearch, setShowGPTSearch] = useState(false);
 
   const addToFavorites = (id) => {
     if (favorites.includes(id)) {
@@ -30,7 +32,20 @@ const GifProvider = ({ children }) => {
 
   return (
     <GifContext.Provider
-      value={{ gf, gifs, setGifs, filter, setFilter, favorites, setFavorites, addToFavorites }}>
+      value={{
+        gf,
+        gifs,
+        setGifs,
+        filter,
+        setFilter,
+        favorites,
+        setFavorites,
+        addToFavorites,
+        isLoading,
+        setIsLoading,
+        showGptSearch,
+        setShowGPTSearch,
+      }}>
       {children}
     </GifContext.Provider>
   );

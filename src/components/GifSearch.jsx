@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 const GifSearch = () => {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
+  
   const searchGifs = async () => {
     if (query.trim() === "") return;
 

@@ -16,3 +16,18 @@ export const filters = [
     background: "bg-gradient-to-tr from-blue-500 via-blue-600 to-blue-500",
   },
 ];
+
+export const placeholders = [
+  "Type how you feel... (e.g. 'Monday blues with coffee')",
+  "Describe a moment... (e.g. 'When WiFi betrays you mid-Zoom')",
+  "Search by vibe... (e.g. 'Excited like a puppy')",
+  "What’s the mood today?",
+  "Need a meme for this moment?",
+  "Try: 'Victory dance after exams'",
+  "Express it in words, we’ll find the GIF",
+  "Say it your way: 'Overworked but fabulous ✨'",
+  "GIF my feelings...",
+  "Try something silly: 'Cat lawyer defending me in court'"
+];
+
+export const OPENAI_Key = import.meta.env.VITE_OPENAI_KEY;

@@ -1,9 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 const Gif = ({ gif, hover = true }) => {
   return (
-    <Link to={`/${gif.type}s/${gif.slug}`}>
       <div className="w-full relative mb-2 group aspect-video">
         <img
           src={gif?.images?.fixed_width.webp}
@@ -25,7 +23,6 @@ const Gif = ({ gif, hover = true }) => {
           </div>
         )}
       </div>
-    </Link>
   );
 };
 

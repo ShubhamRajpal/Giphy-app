@@ -25,6 +25,7 @@ const FilterGif = ({ alignLeft = false, showTrending = false }) => {
       <div className=" flex bg-gray-800 min-w-screen rounded-full sm:min-w-80">
         {filters.map((f) => (
           <span
+            key={f.value}
             onClick={() => setFilter(f.value)}
             className={`font-semibold w-1/3 rounded-full text-center py-2 cursor-pointer ${
               filter == f.value ? f.background : ""
