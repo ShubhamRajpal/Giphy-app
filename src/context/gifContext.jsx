@@ -7,8 +7,8 @@ const GifProvider = ({ children }) => {
   const [gifs, setGifs] = useState([]);
   const [filter, setFilter] = useState("gifs");
   const [favorites, setFavorites] = useState([]);
+  const [gptGifs, setGptGifs] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [showGptSearch, setShowGPTSearch] = useState(false);
 
   const addToFavorites = (id) => {
     if (favorites.includes(id)) {
@@ -43,8 +43,8 @@ const GifProvider = ({ children }) => {
         addToFavorites,
         isLoading,
         setIsLoading,
-        showGptSearch,
-        setShowGPTSearch,
+        gptGifs,
+        setGptGifs
       }}>
       {children}
     </GifContext.Provider>
@@ -54,4 +54,6 @@ const GifProvider = ({ children }) => {
 export const GifState = () => {
   return useContext(GifContext);
 };
+
+
 export default GifProvider;

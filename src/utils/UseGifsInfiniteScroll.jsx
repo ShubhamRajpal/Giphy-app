@@ -13,7 +13,6 @@ const useGifsInfiniteScroll = ({ gifs, setpageno }) => {
     const observer = new IntersectionObserver(
       (param) => {
         if (param[0].isIntersecting) {
-          console.log(param[0]);
           setpageno((prev) => prev + 1);
         }
       },

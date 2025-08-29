@@ -7,6 +7,7 @@ import Category from "./components/Category";
 import GifPage from "./components/GifPage";
 import AppLayout from "./components/AppLayout";
 import GifProvider from "./context/gifContext";
+import GPTSearch from "./components/GPTSearch";
 
 const appRouter = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/favorites",
         element: <Favorites />,
+      },
+      {
+        path: "/gptSearch",
+        element: <GPTSearch />,
       },
     ],
   },

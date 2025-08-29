@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { GifState } from "../context/gifContext";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Gif from "./Gif";
 import FollowOn from "./followOn";
 
@@ -38,7 +38,9 @@ const Category = () => {
         {results?.length > 0 && (
           <div className="columns-2 md:columns-3 lg:column-4 xl:columns-5 gap-2">
             {results.slice(1).map((gif) => (
-              <Gif gif={gif} key={gif.id} />
+              <Link to={`/${gif.type}s/${gif.slug}`} key={gif.id}>
+                <Gif gif={gif} key={gif.id} />
+              </Link>
             ))}
           </div>
         )}

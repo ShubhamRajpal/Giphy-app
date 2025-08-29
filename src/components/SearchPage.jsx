@@ -15,6 +15,7 @@ const SearchPage = () => {
       type: filter,
       sort: "relevant",
       lang: "es",
+      region:"up",
       limit: 25,
     });
 
@@ -24,7 +25,7 @@ const SearchPage = () => {
 
   useEffect(() => {
     fetchSearchResults();
-  }, [filter]);
+  }, [filter,query]);
 
   return (
     <div className="my-4">

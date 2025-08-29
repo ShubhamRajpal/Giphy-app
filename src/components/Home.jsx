@@ -8,21 +8,18 @@ const Home = () => {
   const { gf, gifs, setGifs, filter } = GifState();
   const [pageNo, setPageNo] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-
   const limit = 20;
-  console.log("PageNo-", pageNo);
 
   const fetchTrendingGifs = async () => {
     setIsLoading(true);
 
     const offset = pageNo * limit;
-    const { data, pagination } = await gf.trending({
+    const { data } = await gf.trending({
       type: filter,
       limit: limit,
       offset: offset,
       rating: "g",
     });
-    console.log(data, pagination);
     setGifs((prev) => (pageNo == 0 ? data : [...prev, ...data]));
     setIsLoading(false);
   };
