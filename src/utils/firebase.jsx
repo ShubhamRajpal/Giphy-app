@@ -3,14 +3,24 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 
+// const firebaseConfig = {
+//   apiKey: "AIzaSyAre4aF2ii_XZiNKgD31HO5c0PonedhmPo",
+//   authDomain: "giffyauthhentication.firebaseapp.com",
+//   projectId: "giffyauthhentication",
+//   storageBucket: "giffyauthhentication.firebasestorage.app",
+//   messagingSenderId: "269453059801",
+//   appId: "1:269453059801:web:70fbd466d47e405ddec0c8",
+//   measurementId: "G-HK1HJ8109V"
+// };
+
 const firebaseConfig = {
-  apiKey: "AIzaSyAre4aF2ii_XZiNKgD31HO5c0PonedhmPo",
-  authDomain: "giffyauthhentication.firebaseapp.com",
-  projectId: "giffyauthhentication",
-  storageBucket: "giffyauthhentication.firebasestorage.app",
-  messagingSenderId: "269453059801",
-  appId: "1:269453059801:web:70fbd466d47e405ddec0c8",
-  measurementId: "G-HK1HJ8109V"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase
