@@ -30,16 +30,17 @@ const Login = () => {
         </div>
       )}
       {auth.currentUser && (
-        <div className="relative cursor-pointer flex items-center text-white ">
-          <span className="text-sm">
+        <div className="relative cursor-pointer flex items-center gap-1 text-white transition-all duration-300 ease-in-out">
+          <span className="text-sm hidden sm:block">
             Hi, {auth?.currentUser?.displayName.split(" ")[0].toLowerCase()}
           </span>
+          <img src={auth?.currentUser?.photoURL} className="block sm:hidden h-9 w-9 rounded-full" alt="profile-photo" loading="lazy"/>
           <span onClick={() => setShowLogout(!showLogout)}>
             {" "}
             <MdKeyboardArrowDown size={20} />
           </span>
 
-            <div className={`absolute w-28 h-36 right-0 top-8 px-2 pt-2 pb-8 bg-gray-700 z-20 ${showLogout ? "block" : "hidden"}`}>
+            <div className={`absolute rounded-tr-lg rounded-bl-lg bg-gradient-to-br from-gray-400 via-gray-600 to-gray-800 w-28 h-36 right-0 top-10 sm:right-0 sm:top-8 px-2 pt-2 pb-8 bg-gray-700 z-20 ${showLogout ? "block" : "hidden"}`}>
               <p className="text-md font-semibold">
                 <Link to="/favorites">Favorites</Link>
               </p>

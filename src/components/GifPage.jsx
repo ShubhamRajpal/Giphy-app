@@ -61,7 +61,6 @@ const GifPage = () => {
       const { data: related } = await gf.related(gifId[gifId.length - 1], {
         limit: 10,
       });
-      console.log(data);
       setGif(data);
       setRelatedGifs(related);
     };

@@ -14,7 +14,6 @@ const Favorites = () => {
   const favoritesGifs = useFavorites(auth.currentUser.uid);
 
   const removeFavorite = async (gifId) => {
-    console.log(gifId);
     if (!auth.currentUser) return;
     const userId = auth.currentUser.uid;
     const favRef = doc(db, "users", userId, "favorites", gifId);

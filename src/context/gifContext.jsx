@@ -5,6 +5,7 @@ const GifContext = createContext();
 
 const GifProvider = ({ children }) => {
   const [gifs, setGifs] = useState([]);
+  const [chipTag, setChipTag] = useState(null);
   const [filter, setFilter] = useState("gifs");
   const [favorites, setFavorites] = useState([]);
   const [gptGifs, setGptGifs] = useState([]);
@@ -44,7 +45,9 @@ const GifProvider = ({ children }) => {
         isLoading,
         setIsLoading,
         gptGifs,
-        setGptGifs
+        setGptGifs,
+        chipTag,
+        setChipTag
       }}>
       {children}
     </GifContext.Provider>

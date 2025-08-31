@@ -5,11 +5,11 @@ import { GifState } from "../context/gifContext";
 
 const GPTSearch = () => {
   const { gptGifs } = GifState();
-    
+
   return (
     <div>
       <GPTSearchBar />
-      {gptGifs.length > 0 && <GPTSuggestions />}
+      {gptGifs?.length > 0 && <GPTSuggestions />}
     </div>
   );
 };

@@ -2,19 +2,23 @@ import React, { useEffect, useState } from "react";
 import { HiMiniXMark, HiOutlineMagnifyingGlass } from "react-icons/hi2";
 import { placeholders } from "../utils/constants";
 import openai from "../utils/openai";
-import useSearchGifs from "../hooks/useSearchGifs";
+import useSearchGPTGifs from "../hooks/useSearchGPTGifs";
 import { GifState } from "../context/gifContext";
+import Tags from "./Tags";
 
 const GPTSearchBar = () => {
+
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
   const placeholderList = placeholders;
   const [gptPhrases, setGptPhrases] = useState([]);
-  const { setGptGifs } = GifState();
+  const [isLoading, setIsLoading] = useState(false);
+  const { setGptGifs, setChipTag } = GifState();
   const [query, setQuery] = useState("");
+  const [chipQuery, setChipQuery] = useState("");
 
   const handleGPTSearchClick = async () => {
-
-const gptQuery = `You are an expert at generating creative and effective Giphy search queries. Your task is to analyze a user's natural language query and translate it into actionable search phrases that will return the best possible GIF results.
+    setIsLoading(true);
+    const gptQuery = `You are an expert at generating creative and effective Giphy search queries. Your task is to analyze a user's natural language query and translate it into actionable search phrases that will return the best possible GIF results.
                   Task:
                   Analyze the user's query to understand the core emotion, action, and subject. Then, generate 5-7 short, impactful search phrases that combine these elements to create a highly specific search term.
 
@@ -30,7 +34,7 @@ const gptQuery = `You are an expert at generating creative and effective Giphy s
                   "That moment when you get to eat your favorite biryani"
 
                   Example Output:
-                  ["yummy biryani", "biryani happy eating", "savoring food joy", "foodie satisfied", "biryani mood"]
+                  yummy biryani,biryani happy eating,savoring food joy,foodie satisfied,biryani mood
 
                   Now, generate the Giphy search phrases for this request:
                   "${query}"`;
@@ -42,12 +46,14 @@ const gptQuery = `You are an expert at generating creative and effective Giphy s
     });
 
     const gptArr = gptresults.choices?.[0]?.message?.content.split(",");
-    console.log(gptArr);
 
     setGptPhrases(gptArr);
+    setChipQuery(gptArr[0]);
+    setChipTag(null);
+    setIsLoading(false);
   };
 
-  useSearchGifs(gptPhrases, setGptGifs);
+  useSearchGPTGifs(gptPhrases, setGptGifs);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -85,6 +91,12 @@ const gptQuery = `You are an expert at generating creative and effective Giphy s
           />
         </button>
       </div>
+      {isLoading && (
+        <div className="loader">
+          <div className="justify-content-center primary-loading"></div>
+        </div>
+      )}
+      {chipQuery && <Tags query={chipQuery} gptPhrases={gptPhrases}/>}
     </div>
   );
 };
