@@ -7,7 +7,7 @@ const Modal = ({ type, inputValue, show }) => {
   };
 
   return (
-    <div class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 ">
+    <div class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
       <div className="absolute max-w-sm sm:max-w-md p-2 sm:p-5 z-50 bg-white text-black rounded-lg">
         <div className="flex justify-between my-1">
           <h1 className="font-bold text-md flex justify-between">

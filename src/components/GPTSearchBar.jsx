@@ -7,7 +7,6 @@ import { GifState } from "../context/gifContext";
 import Tags from "./Tags";
 
 const GPTSearchBar = () => {
-
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
   const placeholderList = placeholders;
   const [gptPhrases, setGptPhrases] = useState([]);
@@ -18,26 +17,27 @@ const GPTSearchBar = () => {
 
   const handleGPTSearchClick = async () => {
     setIsLoading(true);
-    const gptQuery = `You are an expert at generating creative and effective Giphy search queries. Your task is to analyze a user's natural language query and translate it into actionable search phrases that will return the best possible GIF results.
-                  Task:
-                  Analyze the user's query to understand the core emotion, action, and subject. Then, generate 5-7 short, impactful search phrases that combine these elements to create a highly specific search term.
+    const gptQuery = `You are an expert at generating creative and effective Giphy search queries. 
+Your job is to take the user’s natural language query and generate 5–7 short search phrases that will return the most relevant GIFs on Giphy. 
 
-                  Guidelines:
-                  - **Be diverse:** Provide a mix of phrases that capture the emotion, the action, and relevant pop culture references (like memes).
-                  - **Be concise:** Each phrase must be 1-3 words long.
-                  - **Use Hinglish:** Incorporate a blend of English and Hindi/Urdu phrases where culturally appropriate and effective.
-                  - **Combine elements:** Generate phrases that combine the emotion with the subject or action to create a more specific query (e.g., "happy eating," "foodie satisfied").
-                  - **Strictly follow format:** Only give me result, comma separated without any space at start or end of strings like the example results given ahead.Example result:
-                  yummy biryani,biryani happy eating,savoring food joy,foodie satisfied,biryani mood
+### Instructions:
+1. **Focus on real Giphy tags** — prefer everyday, popular keywords that people actually use (e.g., "pani puri", "funny dog", "happy dance") instead of abstract ones like "foodie delight".
+2. **Mix Hindi + English (Hinglish)** when appropriate for cultural relevance. For example: "golgappa funny", "desi dance", "filmy style".
+3. **Be specific** — combine the emotion, subject, or action into phrases (e.g., "angry cat", "happy eating", "crying baby").
+4. **Include meme-friendly variations** — add “funny”, “lol”, “meme”, or “reaction” to some queries.
+5. **Mix literal + contextual: Always include at least one phrase that uses exact words from the input.
+6. **Add emotion/tone: If the input has a feeling (happy, sad, funny, angry, awkward, romantic), include it.
+7. **Add pop culture hooks: If it looks like a movie dialogue, meme, or celebrity line, include the movie name, actor, or meme reference.
+8. **Keep it short** — each phrase must be 1–3 words max.
+9. **Add some phrases as well to the results list of 2-3 words length
+10. **Output format** — ONLY return phrases, comma-separated, with no extra spaces or text.
 
-                  Example Input:
-                  "That moment when you get to eat your favorite biryani"
+### Example:
+Input: "That moment when you get pani puri after a long time"  
+Output: pani puri,street food,funny golgappa,desi food,love pani puri,spicy golgappa,happy eating
 
-                  Example Output:
-                  yummy biryani,biryani happy eating,savoring food joy,foodie satisfied,biryani mood
-
-                  Now, generate the Giphy search phrases for this request:
-                  "${query}"`;
+Now, generate Giphy search phrases for this request:
+"${query}"`;
 
     // Make an API call to GPT API and get movie results
     const gptresults = await openai.chat.completions.create({
@@ -46,6 +46,7 @@ const GPTSearchBar = () => {
     });
 
     const gptArr = gptresults.choices?.[0]?.message?.content.split(",");
+    console.log(gptArr);
 
     setGptPhrases(gptArr);
     setChipQuery(gptArr[0]);
@@ -96,7 +97,7 @@ const GPTSearchBar = () => {
           <div className="justify-content-center primary-loading"></div>
         </div>
       )}
-      {chipQuery && <Tags query={chipQuery} gptPhrases={gptPhrases}/>}
+      {chipQuery && <Tags query={chipQuery} gptPhrases={gptPhrases} />}
     </div>
   );
 };

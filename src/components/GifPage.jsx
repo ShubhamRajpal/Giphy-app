@@ -16,6 +16,7 @@ import { auth, db } from "../utils/firebase";
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import useFavorites from "../utils/useFavorites";
 import Modal from "./Modal";
+import FavoriteModal from "./FavoriteModal";
 
 const contentType = ["gifs", "stickers", "texts"];
 
@@ -26,6 +27,7 @@ const GifPage = () => {
   const [readMore, setReadMore] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
   const [showEmbedModal, setShowEmbedModal] = useState(false);
+  const [showFavoriteModal, setShowFavoriteModal] = useState(false);
   const favoritesGifs = useFavorites(auth?.currentUser?.uid);
   const { gf } = GifState();
 
@@ -33,10 +35,10 @@ const GifPage = () => {
   const iFrame = `<iframe src=${embedURL} width="480" height="365" style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href=${gif?.url}>via GIPHY</a></p>`;
 
   const saveFavorite = async () => {
-    if (!auth.currentUser) {
-      alert("Please login to manage favorites");
-      return;
+    if(!auth.currentUser){
+      setShowFavoriteModal(true);
     }
+
     console.log("Data added to DB");
     const userId = auth.currentUser.uid;
     const favRef = doc(db, "users", userId, "favorites", gif.id);
@@ -92,6 +94,7 @@ const GifPage = () => {
           show={() => setShowEmbedModal(false)}
         />
       )}
+      {showFavoriteModal && <FavoriteModal show={() => setShowFavoriteModal(false)}/>}
       <div className="hidden sm:block">
         {gif?.user && (
           <>
@@ -193,7 +196,7 @@ const GifPage = () => {
             </button>
             <button
               onClick={shareGif} // Assignment
-              className="flex gap-6 items-center font-bold text-lg hover:text-yellow-400" >
+              className="flex gap-6 items-center font-bold text-lg hover:text-yellow-400">
               <FaPaperPlane size={25} />
               Share
             </button>
